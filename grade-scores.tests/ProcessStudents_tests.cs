@@ -67,7 +67,8 @@ Herron,Tom,75
 Wood,Janelle,75
 Wood,John,75
 Wood,Val,75
-Wood,Rebekah,50";           
+Wood,Rebekah,50";      
+     
             ProcessStudents target = new ProcessStudents(rawText);
             String actual = target.getOrderedStudents();
             Assert.AreEqual(expected, actual);
