@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace grade_scores
 {
-    class ProcessStudents
+    public class ProcessStudents
     {
         Student[] students;
         Student[] newOrderedStudents;
@@ -26,22 +26,29 @@ namespace grade_scores
         }
         private void ProcessRawText()
         {
-            string[] lines;          
-            lines = rawText.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
-            size = lines.Length;
-            this.students = new Student[size];
-
-            for(int i = 0 ;i < size; i++)
+            try
             {
-                string[] splitLine = lines[i].Split(',');
-                students[i] = new Student();
-                students[i].firstName = splitLine[0].Trim();
-                students[i].surName = splitLine[1].Trim();
-                int parsedInt;
-                if (Int32.TryParse(splitLine[2], out parsedInt))
-                    students[i].score = parsedInt;
-                else
-                    throw new Exception("Score in the file is not an int.");
+                string[] lines;
+                lines = rawText.Split(new string[] { "\r\n", "\n" }, StringSplitOptions.None);
+                size = lines.Length;
+                this.students = new Student[size];
+
+                for (int i = 0; i < size; i++)
+                {
+                    string[] splitLine = lines[i].Split(',');
+                    students[i] = new Student();
+                    students[i].firstName = splitLine[0].Trim();
+                    students[i].surName = splitLine[1].Trim();
+                    int parsedInt;
+                    if (Int32.TryParse(splitLine[2], out parsedInt))
+                        students[i].score = parsedInt;
+                    else
+                        throw new Exception("Score in the file is not an int.");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("The text in the file is not in the correct format");
             }
             
         }

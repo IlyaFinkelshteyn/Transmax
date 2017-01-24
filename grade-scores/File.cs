@@ -8,7 +8,7 @@ using System.IO;
 
 namespace grade_scores
 {
-    class File
+    public class File
     {
         String fileName;
         String absoluteFilePath;
